@@ -1,15 +1,21 @@
-resource "google_compute_instance" "my_instance" {
-  name         = var.instance_name
-  machine_type = var.machine_type
-  zone         = var.zone
-
-  boot_disk {
-    initialize_params {
-      image = var.image
-    }
-  }
-
-  network_interface {
-    network = "default"
-  }
+provider "google" {
+  project     = "genuine-citron-382303"
+  region      = "us-central1"
+}
+resource "google_service_account" "service_account" {
+  account_id = "github-action-1"
+  # display_name = "Your Service Account"
+  # project  = "genuine-citron-382303"
+}
+resource "google_project_iam_member" "service_account_iam" {
+  project = "genuine-citron-382303"
+  role    = "roles/iam.serviceAccountUser"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
+}
+resource "google_artifact_registry_repository" "gar" {
+  project       = "genuine-citron-382303"
+  location      = "us-central1"
+  repository_id = "repository"
+  format        = "docker"
+  depends_on = [google_service_account.service_account]
 }
