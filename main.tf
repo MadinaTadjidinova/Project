@@ -3,7 +3,7 @@ provider "google" {
   region      = "us-central1"
 }
 resource "google_service_account" "service_account" {
-  account_id = "github-action-1"
+  account_id = "github-action-2"
   display_name = "Service Account"
   project  = "genuine-citron-382303"
 }
