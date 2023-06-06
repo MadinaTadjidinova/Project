@@ -4,8 +4,8 @@ provider "google" {
 }
 resource "google_service_account" "service_account" {
   account_id = "github-action-1"
-  # display_name = "Your Service Account"
-  # project  = "genuine-citron-382303"
+  display_name = "Service Account"
+  project  = "genuine-citron-382303"
 }
 resource "google_project_iam_member" "service_account_iam" {
   project = "genuine-citron-382303"
